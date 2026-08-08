@@ -1,0 +1,12 @@
+gene,drug,mutation,who_confidence_grade,confidence_label,notes
+katG,Isoniazid,S315T,1,Assoc w R,"Most common INH-resistance mutation worldwide; found in ~50-95% of INH-resistant isolates depending on setting"
+katG,Isoniazid,S315N,2,Assoc w R - Interim,Substantially less common than S315T; reduces catalase-peroxidase activity
+katG,Isoniazid,S315I,2,Assoc w R - Interim,Rare; associated with high-level INH resistance
+katG,Isoniazid,W328L,3,Uncertain significance,Reported in a minority of resistant isolates; functional impact not fully characterized
+katG,Isoniazid,D419A,4,Not assoc w R - Interim,Frequently observed but not associated with resistance phenotype
+rpoB,Rifampicin,S450L,1,Assoc w R,"Most common RIF-resistance mutation (legacy numbering S531L); within the RRDR"
+rpoB,Rifampicin,H445Y,1,Assoc w R,Common RRDR mutation (legacy H526Y); high-level resistance
+rpoB,Rifampicin,H445D,2,Assoc w R - Interim,RRDR mutation (legacy H526D); variable resistance level
+rpoB,Rifampicin,D435V,2,Assoc w R - Interim,RRDR mutation (legacy D516V); sometimes associated with lower-level resistance
+rpoB,Rifampicin,L430P,3,Uncertain significance,Borderline phenotype in phenotypic DST; disputed clinical significance
+rpoB,Rifampicin,I491F,1,Assoc w R,"Outside classic RRDR; missed by some line-probe assays, associated with rifampicin resistance"

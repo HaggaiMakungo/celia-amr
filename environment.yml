@@ -1,0 +1,30 @@
+name: celia-amr
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - biopython       # genome parsing (FASTA/GenBank), sequence work
+  - rdkit            # compound handling: SMILES -> 3D structure, docking prep
+  - openbabel        # protein/ligand file format conversion (conda-only; see note below)
+  - autodock-vina    # docking engine (conda-only; see note below)
+  - scipy            # SEIR via odeint / solve_ivp
+  - pandas
+  - numpy
+  - requests
+  - pytest
+  - pip
+  - pip:
+      - pubchempy     # PubChem API wrapper
+      - meeko         # ligand/receptor PDBQT prep (pip fallback for openbabel/AutoDockTools)
+      - gemmi         # structure parsing, meeko dependency
+      - truststore     # use the OS certificate store for SSL (fixes broken OpenSSL trust stores)
+
+# Note on Windows without conda: neither `vina` nor `openbabel`/`openbabel-wheel`
+# publish Windows wheels on PyPI (their sdists need a Boost/build toolchain this
+# project doesn't assume). `molecular_docking/run_docking.py` works around this
+# without conda by downloading the official precompiled `vina.exe` from the
+# AutoDock-Vina GitHub releases and using `meeko` (pure-Python, RDKit-based) in
+# place of OpenBabel. If conda *is* available, the `autodock-vina`/`openbabel`
+# conda-forge packages above are a drop-in equivalent. See the module docstring
+# in `run_docking.py` for details.

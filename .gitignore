@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Conda / venv
+.conda/
+env/
+venv/
+.venv311/
+
+# Docking / large downloaded data (fetched at runtime, not committed)
+data/structures/*
+!data/structures/.gitkeep
+molecular_docking/bin/
+molecular_docking/work/
+
+# OS
+.DS_Store
+Thumbs.db
