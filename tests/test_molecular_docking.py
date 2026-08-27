@@ -1,4 +1,5 @@
 import pytest
+import subprocess
 
 from molecular_docking.run_docking import (
     TARGETS,
@@ -6,6 +7,7 @@ from molecular_docking.run_docking import (
     clean_receptor_pdb,
     compute_box_center,
     parse_vina_output,
+    run_vina,
 )
 
 VINA_STDOUT_SAMPLE = """\
@@ -55,6 +57,23 @@ def test_parse_vina_output_extracts_all_poses():
 def test_parse_vina_output_ignores_non_pose_lines():
     poses = parse_vina_output("some\nrandom\ntext\nwith no pose rows")
     assert poses == []
+
+
+def test_run_vina_reports_a_clear_timeout(monkeypatch, tmp_path):
+    def timeout(*_args, **_kwargs):
+        raise subprocess.TimeoutExpired(cmd="vina", timeout=15)
+
+    monkeypatch.setattr("molecular_docking.run_docking.subprocess.run", timeout)
+    with pytest.raises(RuntimeError, match="timed out after 15 seconds"):
+        run_vina(
+            tmp_path / "vina.exe",
+            tmp_path / "receptor.pdbqt",
+            tmp_path / "ligand.pdbqt",
+            (0.0, 0.0, 0.0),
+            (20.0, 20.0, 20.0),
+            tmp_path / "result.pdbqt",
+            timeout_seconds=15,
+        )
 
 
 def test_parse_vina_output_poses_are_sorted_best_first_by_construction():

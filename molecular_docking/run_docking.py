@@ -263,6 +263,8 @@ def run_vina(
     out_pdbqt: Path,
     seed: int = 42,
     exhaustiveness: int = 8,
+    cpu: int | None = None,
+    timeout_seconds: float | None = None,
 ) -> list[DockingPose]:
     out_pdbqt.parent.mkdir(parents=True, exist_ok=True)
     cmd = [
@@ -279,7 +281,12 @@ def run_vina(
         "--seed", str(seed),
         "--exhaustiveness", str(exhaustiveness),
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    if cpu is not None:
+        cmd.extend(["--cpu", str(cpu)])
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_seconds)
+    except subprocess.TimeoutExpired as exc:
+        raise RuntimeError(f"vina timed out after {timeout_seconds:.0f} seconds") from exc
     if result.returncode != 0:
         raise RuntimeError(f"vina failed:\n{result.stdout}\n{result.stderr}")
     return parse_vina_output(result.stdout)

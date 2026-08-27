@@ -15,6 +15,10 @@ data/structures/*
 molecular_docking/bin/
 molecular_docking/work/
 
+# Regenerable approved-drug docking library
+data/ligand_library/*
+!data/ligand_library/.gitkeep
+
 # OS
 .DS_Store
 Thumbs.db

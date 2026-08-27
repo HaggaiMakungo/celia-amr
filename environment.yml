@@ -19,6 +19,7 @@ dependencies:
       - meeko         # ligand/receptor PDBQT prep (pip fallback for openbabel/AutoDockTools)
       - gemmi         # structure parsing, meeko dependency
       - truststore     # use the OS certificate store for SSL (fixes broken OpenSSL trust stores)
+      - chembl-webresource-client  # optional ChEMBL API helper; library generator uses REST directly
 
 # Note on Windows without conda: neither `vina` nor `openbabel`/`openbabel-wheel`
 # publish Windows wheels on PyPI (their sdists need a Boost/build toolchain this
