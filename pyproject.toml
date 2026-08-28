@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "celia-amr"
+version = "0.1.0"
+description = "Celia tuberculosis antimicrobial-resistance prototype"
+requires-python = ">=3.11"
+
+[project.scripts]
+celia = "celia:main"
+
+[tool.setuptools]
+py-modules = ["celia"]
+
+[tool.setuptools.packages.find]
+include = ["genomic_analysis*", "molecular_docking*", "risk_fusion*", "shared*", "spread_modelling*"]

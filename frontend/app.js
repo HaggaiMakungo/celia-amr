@@ -7,6 +7,8 @@ const state = {
 
 const ANALYSIS_ANIMATION_MS = 760;
 const SCRAMBLE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const liveBackend = new URLSearchParams(window.location.search).get("live") === "1";
+const demoData = window.CELIA_DEMO_DATA;
 
 const pages = [...document.querySelectorAll(".page")];
 const navItems = [...document.querySelectorAll(".nav-item")];
@@ -152,13 +154,19 @@ async function runAssessment(event) {
   const stopPreview = createAssessmentPreview(gene);
   const startedAt = performance.now();
   try {
-    const response = await fetch("/api/analysis", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ gene }),
-    });
-    const payload = await response.json();
-    if (!response.ok) throw new Error(payload.error || "The assessment could not be completed.");
+    let payload;
+    if (liveBackend) {
+      const response = await fetch("/api/analysis", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ gene }),
+      });
+      payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "The assessment could not be completed.");
+    } else {
+      payload = demoData.assessments[gene];
+      if (!payload) throw new Error("The selected demo result is unavailable.");
+    }
     await wait(Math.max(0, ANALYSIS_ANIMATION_MS - (performance.now() - startedAt)));
     stopPreview();
     renderAssessment(payload);
@@ -189,9 +197,16 @@ document.querySelector("#print-brief").addEventListener("click", () => window.pr
 
 async function initialise() {
   try {
-    const response = await fetch("/api/project");
-    const payload = await response.json();
-    state.candidates = payload.candidates;
+    let candidates;
+    if (liveBackend) {
+      const response = await fetch("/api/project");
+      const payload = await response.json();
+      if (!response.ok) throw new Error("Project data is unavailable.");
+      candidates = payload.candidates;
+    } else {
+      candidates = demoData.candidates;
+    }
+    state.candidates = candidates;
     state.selectedCandidate = state.candidates[0];
     updateCandidateCard();
     renderCandidates();
