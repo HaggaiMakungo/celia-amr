@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Celia AMR research workspace" />
+    <title>Celia Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#projects" aria-label="Celia Workspace home"><span>Celia</span><small>Workspace</small></a>
+        <nav aria-label="Workspace navigation">
+          <button class="nav-item is-active" type="button" data-view="projects" aria-current="page"><i>□</i> Projects</button>
+          <button class="nav-item" type="button" data-view="analysis"><i>↗</i> Guided analysis</button>
+          <button class="nav-item" type="button" data-view="screen"><i>⊞</i> Compound screen</button>
+          <button class="nav-item" type="button" data-view="risk"><i>◇</i> Risk scenarios</button>
+          <button class="nav-item" type="button" data-view="brief"><i>▤</i> Research brief</button>
+        </nav>
+        <div class="sidebar-project"><small>PRJ-042</small><strong>TB investigation</strong><span title="Programme active"></span></div>
+        <button class="demo-reset" id="reset-demo" type="button"><span aria-hidden="true">↺</span> Reset demo</button>
+      </aside>
+
+      <main class="workspace" id="main-content">
+        <section class="page is-active" id="projects" aria-labelledby="projects-title">
+          <header class="page-header split-header">
+            <div><p class="eyebrow">ACTIVE PROGRAMME · PRJ-042</p><h1 id="projects-title">Research projects</h1></div>
+            <p>Keep the programme, its evidence, and the next research decision in one shared place.</p>
+          </header>
+          <article class="featured-project">
+            <div class="featured-copy"><span class="badge badge-mint">FEATURED PROJECT</span><h2>Drug-resistant TB investigation</h2><p>Integrated biological and chemical profiling to identify novel therapeutic opportunities.</p><small>RECOMMENDED NEXT STEP</small><button class="button button-primary" type="button" data-view="analysis">Start guided analysis <b>→</b></button></div>
+          </article>
+          <div class="project-grid">
+            <article class="project-card"><span class="badge badge-lilac">FUTURE PROGRAMME</span><h3>Next-generation therapeutics</h3><p>Early research programme awaiting biological evidence review.</p></article>
+            <article class="project-card"><span class="badge badge-lilac">FUTURE PROGRAMME</span><h3>TB diagnostics</h3><p>Diagnostic pathway ready to be scoped against the current programme.</p></article>
+          </div>
+        </section>
+
+        <section class="page" id="analysis" aria-labelledby="analysis-title">
+          <header class="page-header"><p class="eyebrow">PRJ-042 · GUIDED ANALYSIS</p><h1 id="analysis-title">Guide the next decision.</h1><p>Run the bundled resistance examples through the existing Celia genomic and risk-fusion pipeline.</p></header>
+          <ol class="workflow" aria-label="Guided analysis progress"><li class="is-current"><b>01</b><span>Genomic signal</span></li><li><b>02</b><span>Target context</span></li><li><b>03</b><span>Compound shortlist</span></li><li><b>04</b><span>Risk scenario</span></li></ol>
+          <div class="analysis-layout">
+            <form class="analysis-form" id="analysis-form">
+              <p class="eyebrow">START WITH A BUNDLED SAMPLE</p><h2>Genomic signal</h2><p>Choose a validated repository example. The browser sends only the selected gene; the server uses the paired local FASTA safely.</p>
+              <fieldset><legend>Resistance gene</legend><label><input type="radio" name="gene" value="katG" checked /> <span><b>katG</b><small>Isoniazid resistance example</small></span></label><label><input type="radio" name="gene" value="rpoB" /> <span><b>rpoB</b><small>Rifampicin resistance example</small></span></label></fieldset>
+              <button class="button button-primary" id="run-analysis" type="submit">Run assessment <b>→</b></button><p class="form-note">Docking remains opt-in in the scientific pipeline and is not triggered here.</p>
+            </form>
+            <article class="analysis-result" aria-live="polite" id="analysis-result" hidden></article>
+          </div>
+        </section>
+
+        <section class="page" id="screen" aria-labelledby="screen-title">
+          <header class="page-header"><p class="eyebrow">PRJ-042 · COMPOUND SCREEN</p><h1 id="screen-title">Compound screen</h1><p>Compare the illustrative lead candidates against the evidence context.</p></header>
+          <div class="screen-layout"><article class="candidate-card"><p class="eyebrow">SELECTED CANDIDATE</p><h2 id="candidate-name">ZMB-041</h2><span class="badge badge-mint" id="candidate-status">LEAD CANDIDATE</span><p id="candidate-copy">High-confidence molecular fit with a tractable next validation.</p><dl><div><dt>DOCKING</dt><dd id="candidate-score">−9.2</dd></div><div><dt>FIT</dt><dd id="candidate-fit">High</dd></div></dl></article><div class="candidate-list" id="candidate-list" aria-label="Candidate list"></div></div>
+          <div class="next-action"><div><p class="eyebrow">NEXT DECISION</p><strong>Compare the selected candidate against risk scenarios.</strong></div><button class="button button-primary" type="button" data-view="risk">Compare risk scenarios <b>→</b></button></div>
+        </section>
+
+        <section class="page" id="risk" aria-labelledby="risk-title">
+          <header class="page-header"><p class="eyebrow">PRJ-042 · RISK SCENARIOS</p><h1 id="risk-title">Compare the next move.</h1><p>Set the programme context that should accompany the research brief.</p></header>
+          <div class="risk-layout"><article class="projection-card"><p class="eyebrow">PROJECTED CASE BURDEN</p><div class="chart" aria-label="Illustrative case-burden projection"><i class="chart-base"></i><i class="chart-target"></i></div><p class="chart-labels">Week 0 <span>Week 6</span> <span>Week 12</span></p></article><div class="scenario-stack"><button class="scenario is-selected" type="button" data-scenario="Targeted response"><span><b>Targeted response</b><small>Earlier detection + focused action</small></span><strong>−12%</strong></button><button class="scenario" type="button" data-scenario="Baseline"><span><b>Baseline</b><small>No programme change</small></span><strong>+18%</strong></button><article class="recommendation"><i>✦</i><div><small>CELIA RECOMMENDS</small><b id="recommendation-copy">Carry the targeted response into the research brief.</b></div></article></div></div>
+          <div class="next-action"><div><p class="eyebrow">NEXT DECISION</p><strong>Carry the recommended response into the research brief.</strong></div><button class="button button-primary" type="button" data-view="brief">Open research brief <b>→</b></button></div>
+        </section>
+
+        <section class="page" id="brief" aria-labelledby="brief-title">
+          <header class="page-header"><p class="eyebrow">RESEARCH BRIEF · PRJ-042</p><h1 id="brief-title">Drug-resistant TB investigation</h1></header>
+          <article class="brief-card"><p class="eyebrow">RESEARCH QUESTION</p><h2>Which candidates warrant targeted validation against the resistant profile?</h2><ol><li><b>01</b><div><small>GENOMIC INSIGHT</small><strong id="brief-genomic">Run an assessment to add genomic evidence.</strong><p>Evidence is sourced from the WHO TB mutation catalogue in this repository.</p></div></li><li><b>02</b><div><small>COMPOUND PRIORITY</small><strong id="brief-candidate">ZMB-041 selected for follow-up</strong><p>Top candidate in the illustrative local shortlist.</p></div></li><li><b>03</b><div><small>RISK CONTEXT</small><strong id="brief-risk">Targeted response preferred</strong><p>Scenario choice is held with the evidence.</p></div></li></ol><div class="next-action"><div><p class="eyebrow">FINAL STEP</p><strong>Save and share the research brief with the programme team.</strong></div><button class="button button-primary" id="print-brief" type="button">Print / save brief <b>↗</b></button></div></article>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
